@@ -99,6 +99,14 @@ extension YPLibraryVC {
     /// Checks if there can be selected more items. If no - present warning.
     func checkLimit() {
         v.maxNumberWarningView.isHidden = !isLimitExceeded || multipleSelectionEnabled == false
+        self.updateEmptyStateVisibilityIfNeeded()
+    }
+    
+    private func updateEmptyStateVisibilityIfNeeded() {
+        if YPConfig.library.emptyStateView != nil {
+            self.v.emptyStateContainerView.isHidden = self.selection.count != 0
+            self.v.assetZoomableView.isHidden = self.selection.count == 0
+        }
     }
 }
 
