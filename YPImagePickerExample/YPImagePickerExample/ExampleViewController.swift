@@ -163,6 +163,19 @@ class ExampleViewController: UIViewController {
         config.library.emptyStateView = emptyStateView
       
         config.library.defaultFirstItemSelected = false
+      
+        let doneView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+        doneView.backgroundColor = .red
+      
+        let doneLabel = UILabel(frame: .zero)
+        doneLabel.text = "next"
+        doneLabel.numberOfLines = 0
+        doneLabel.textColor = .white
+      
+        doneView.sv(doneLabel)
+        doneLabel.fillContainer()
+      
+        config.library.doneButtonView = doneView
         
         /* Skip selection gallery after multiple selections */
         // config.library.skipSelectionsGallery = true

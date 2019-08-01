@@ -271,11 +271,23 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         
         switch mode {
         case .library:
+            
+            let doneButton: UIBarButtonItem?
+            
+            if let doneButtonView = YPConfig.library.doneButtonView {
+                let panGesture = UITapGestureRecognizer(target: self, action: #selector(done))
+                doneButtonView.addGestureRecognizer(panGesture)
+                doneButton = UIBarButtonItem(customView: doneButtonView)
+            } else {
+                doneButton = UIBarButtonItem(title: YPConfig.wordings.next,
+                                                                    style: .done,
+                                                                    target: self,
+                                                                    action: #selector(done))
+            }
+            
             setTitleViewWithTitle(aTitle: libraryVC?.title ?? "")
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: YPConfig.wordings.next,
-                                                                style: .done,
-                                                                target: self,
-                                                                action: #selector(done))
+            
+            navigationItem.rightBarButtonItem = doneButton
             navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
             
             // Disable Next Button until minNumberOfItems is reached.

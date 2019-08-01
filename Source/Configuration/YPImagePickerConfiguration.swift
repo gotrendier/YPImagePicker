@@ -192,6 +192,8 @@ public struct YPConfigLibrary {
     
     /// Show view when no item selected
     public var emptyStateView: UIView?
+    
+    public var doneButtonView: UIView?
 }
 
 /// Encapsulates video specific settings.
