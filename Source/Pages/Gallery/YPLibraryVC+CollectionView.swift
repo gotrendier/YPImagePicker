@@ -152,7 +152,7 @@ extension YPLibraryVC: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let previouslySelectedIndexPath = IndexPath(row: currentlySelectedIndex, section: 0)
+        let previouslySelectedIndexPath: IndexPath? = currentlySelectedIndex >= 0 ? IndexPath(row: currentlySelectedIndex, section: 0) : nil
         currentlySelectedIndex = indexPath.row
 
         changeAsset(mediaManager.fetchResult[indexPath.row])
@@ -167,7 +167,7 @@ extension YPLibraryVC: UICollectionViewDelegate {
         if multipleSelectionEnabled {
             
             let cellIsInTheSelectionPool = isInSelectionPool(indexPath: indexPath)
-            let cellIsCurrentlySelected = previouslySelectedIndexPath.row == currentlySelectedIndex
+            let cellIsCurrentlySelected = previouslySelectedIndexPath?.row == currentlySelectedIndex
 
             if cellIsInTheSelectionPool {
                 if cellIsCurrentlySelected {
@@ -187,7 +187,9 @@ extension YPLibraryVC: UICollectionViewDelegate {
         }
 
         collectionView.reloadItems(at: [indexPath])
-        collectionView.reloadItems(at: [previouslySelectedIndexPath])
+        if let previouslySelectedIndexPath = previouslySelectedIndexPath {
+            collectionView.reloadItems(at: [previouslySelectedIndexPath])            
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {

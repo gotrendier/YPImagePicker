@@ -11,6 +11,7 @@ import YPImagePicker
 import AVFoundation
 import AVKit
 import Photos
+import Stevia
 
 class ExampleViewController: UIViewController {
     var selectedItems = [YPMediaItem]()
@@ -70,10 +71,10 @@ class ExampleViewController: UIViewController {
         /* Uncomment and play around with the configuration 👨‍🔬 🚀 */
 
         /* Set this to true if you want to force the  library output to be a squared image. Defaults to false */
-//         config.library.onlySquare = true
+        config.library.onlySquare = true
 
         /* Set this to true if you want to force the camera output to be a squared image. Defaults to true */
-        // config.onlySquareImagesFromCamera = false
+        config.onlySquareImagesFromCamera = true
 
         /* Ex: cappedTo:1024 will make sure images from the library or the camera will be
            resized to fit in a 1024x1024 box. Defaults to original image size. */
@@ -86,7 +87,7 @@ class ExampleViewController: UIViewController {
         // config.usesFrontCamera = true
 
         /* Adds a Filter step in the photo taking process. Defaults to true */
-        // config.showsFilters = false
+        config.showsPhotoFilters = false
 
         /* Manage filters by yourself */
 //        config.filters = [YPFilter(name: "Mono", coreImageFilterName: "CIPhotoEffectMono"),
@@ -111,7 +112,7 @@ class ExampleViewController: UIViewController {
 
         /* Defines which screens are shown at launch, and their order.
            Default value is `[.library, .photo]` */
-        config.screens = [.library, .photo, .video]
+        config.screens = [.library, .photo]
         
         /* Can forbid the items with very big height with this property */
 //        config.library.minWidthForItem = UIScreen.main.bounds.width * 0.8
@@ -125,13 +126,13 @@ class ExampleViewController: UIViewController {
         config.video.libraryTimeLimit = 500.0
 
         /* Adds a Crop step in the photo taking process, after filters. Defaults to .none */
-        config.showsCrop = .rectangle(ratio: (16/9))
+        //config.showsCrop = .rectangle(ratio: (16/9))
 
         /* Defines the overlay view for the camera. Defaults to UIView(). */
-        // let overlayView = UIView()
-        // overlayView.backgroundColor = .red
-        // overlayView.alpha = 0.3
-        // config.overlayView = overlayView
+        let overlayView = UIView()
+        overlayView.backgroundColor = .red
+        overlayView.alpha = 0.3
+        config.overlayView = overlayView
 
         /* Customize wordings */
         config.wordings.libraryTitle = "Gallery"
@@ -146,7 +147,22 @@ class ExampleViewController: UIViewController {
         
         /* Disable scroll to change between mode */
         // config.isScrollToChangeModesEnabled = false
-//        config.library.minNumberOfItems = 2
+        config.library.minNumberOfItems = 0
+      
+        let emptyStateView = UIView()
+        emptyStateView.backgroundColor = .black
+      
+        let label = UILabel(frame: .zero)
+        label.text = "Publica hasta 4 fotos\n\nCuantas más fotos subas,\nmás posibilidades tendrás de vender."
+        label.numberOfLines = 0
+        label.textColor = .white
+      
+        emptyStateView.sv(label)
+        label.fillContainer()
+      
+        config.library.emptyStateView = emptyStateView
+      
+        config.library.defaultFirstItemSelected = false
         
         /* Skip selection gallery after multiple selections */
         // config.library.skipSelectionsGallery = true

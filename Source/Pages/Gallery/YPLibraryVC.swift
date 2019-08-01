@@ -17,7 +17,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     internal var multipleSelectionEnabled = false
     internal var initialized = false
     internal var selection = [YPLibrarySelection]()
-    internal var currentlySelectedIndex: Int = 0
+    internal var currentlySelectedIndex: Int = -1
     internal let mediaManager = LibraryMediaManager()
     internal var latestImageTapped = ""
     internal let panGestureHelper = PanGestureHelper()
@@ -44,12 +44,17 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     }
     
     func initialize() {
+        
+        v.hideLoader()
+        
         mediaManager.initialize()
         mediaManager.v = v
 
         if mediaManager.fetchResult != nil {
             return
         }
+        
+        currentlySelectedIndex = YPConfig.library.defaultFirstItemSelected ? 0 : -1
         
         setupCollectionView()
         registerForLibraryChanges()
@@ -62,6 +67,15 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         }
         v.assetViewContainer.multipleSelectionButton.isHidden = !(YPConfig.library.maxNumberOfItems > 1)
         v.maxNumberWarningLabel.text = String(format: YPConfig.wordings.warningMaxItemsLimit, YPConfig.library.maxNumberOfItems)
+        
+        if let emptyStateView = YPConfig.library.emptyStateView {
+            v.emptyStateContainerView.sv(emptyStateView)
+            emptyStateView.centerInContainer()
+            emptyStateView.fillContainer()
+            v.emptyStateContainerView.isHidden = false
+        } else {
+            v.emptyStateContainerView.isHidden = true
+        }
     }
     
     // MARK: - View Lifecycle
@@ -144,20 +158,22 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         
         multipleSelectionEnabled = !multipleSelectionEnabled
 
-        if multipleSelectionEnabled {
-            if selection.isEmpty {
-                let asset = mediaManager.fetchResult[currentlySelectedIndex]
-                selection = [
-                    YPLibrarySelection(index: currentlySelectedIndex,
-                                       cropRect: v.currentCropRect(),
-                                       scrollViewContentOffset: v.assetZoomableView!.contentOffset,
-                                       scrollViewZoomScale: v.assetZoomableView!.zoomScale,
-                                       assetIdentifier: asset.localIdentifier)
-                ]
+        if currentlySelectedIndex >= 0 {
+            if multipleSelectionEnabled {
+                if selection.isEmpty {
+                    let asset = mediaManager.fetchResult[currentlySelectedIndex]
+                    selection = [
+                        YPLibrarySelection(index: currentlySelectedIndex,
+                                           cropRect: v.currentCropRect(),
+                                           scrollViewContentOffset: v.assetZoomableView!.contentOffset,
+                                           scrollViewZoomScale: v.assetZoomableView!.zoomScale,
+                                           assetIdentifier: asset.localIdentifier)
+                    ]
+                }
+            } else {
+                selection.removeAll()
+                addToSelection(indexPath: IndexPath(row: currentlySelectedIndex, section: 0))
             }
-        } else {
-            selection.removeAll()
-            addToSelection(indexPath: IndexPath(row: currentlySelectedIndex, section: 0))
         }
 
         v.assetViewContainer.setMultipleSelectionMode(on: multipleSelectionEnabled)
@@ -237,18 +253,20 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         } else {
             mediaManager.fetchResult = PHAsset.fetchAssets(with: options)
         }
-                
-        if mediaManager.fetchResult.count > 0 {
-            changeAsset(mediaManager.fetchResult[0])
-            v.collectionView.reloadData()
-            v.collectionView.selectItem(at: IndexPath(row: 0, section: 0),
-                                             animated: false,
-                                             scrollPosition: UICollectionView.ScrollPosition())
-            if !multipleSelectionEnabled {
-                addToSelection(indexPath: IndexPath(row: 0, section: 0))
+        
+        if currentlySelectedIndex >= 0 {
+            if mediaManager.fetchResult.count > 0 {
+                changeAsset(mediaManager.fetchResult[0])
+                v.collectionView.reloadData()
+                v.collectionView.selectItem(at: IndexPath(row: 0, section: 0),
+                                                 animated: false,
+                                                 scrollPosition: UICollectionView.ScrollPosition())
+                if !multipleSelectionEnabled {
+                    addToSelection(indexPath: IndexPath(row: 0, section: 0))
+                }
+            } else {
+                delegate?.noPhotosForOptions()
             }
-        } else {
-            delegate?.noPhotosForOptions()
         }
         scrollToTop()
     }
@@ -301,7 +319,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                                                   mediaManager: self.mediaManager,
                                                   storedCropPosition: self.fetchStoredCrop(),
                                                   completion: completion)
-            case .audio, .unknown:
+            default:
                 ()
             }
         }

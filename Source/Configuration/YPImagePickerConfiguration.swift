@@ -170,6 +170,9 @@ public struct YPConfigLibrary {
 
     /// Initial state of multiple selection button.
     public var defaultMultipleSelection = false
+    
+    /// Inititial state of library
+    public var defaultFirstItemSelected = true
 
     /// Anything superior than 1 will enable the multiple selection feature.
     public var maxNumberOfItems = 1
@@ -186,6 +189,9 @@ public struct YPConfigLibrary {
 
     /// Allow to skip the selections gallery when selecting the multiple media items. Defaults to false.
     public var skipSelectionsGallery = false
+    
+    /// Show view when no item selected
+    public var emptyStateView: UIView?
 }
 
 /// Encapsulates video specific settings.
