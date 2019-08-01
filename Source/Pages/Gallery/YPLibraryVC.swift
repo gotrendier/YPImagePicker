@@ -446,7 +446,10 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                     self.delegate?.libraryViewFinishedLoading()
                 }
         } else {
-                let asset = selectedAssets.first!.asset
+                guard let asset = selectedAssets.first?.asset else {
+                    return
+                }
+                
                 switch asset.mediaType {
                 case .video:
                     self.checkVideoLengthAndCrop(for: asset, callback: { videoURL in
@@ -467,7 +470,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                             photoCallback(photo)
                         }
                     }
-                case .audio, .unknown:
+                default:
                     return
                 }
             }
