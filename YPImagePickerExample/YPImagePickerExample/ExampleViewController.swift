@@ -164,7 +164,7 @@ class ExampleViewController: UIViewController {
       
         config.library.defaultFirstItemSelected = false
       
-        let doneView = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 40))
+        let doneView = UIView(frame: .zero)
         doneView.backgroundColor = .red
       
         let doneLabel = UILabel(frame: .zero)
