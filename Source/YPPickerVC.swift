@@ -279,7 +279,8 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
             navigationItem.rightBarButtonItem?.tintColor = YPConfig.colors.tintColor
             
             // Disable Next Button until minNumberOfItems is reached.
-            navigationItem.rightBarButtonItem?.isEnabled = libraryVC!.selection.count >= YPConfig.library.minNumberOfItems
+            
+            navigationItem.rightBarButtonItem?.isEnabled = self.isNextButtonEnabled
 
         case .camera:
             navigationItem.titleView = nil
@@ -324,6 +325,14 @@ open class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         libraryVC?.v.assetZoomableView.videoView.deallocate()
         videoVC?.stopCamera()
         cameraVC?.stopCamera()
+    }
+    
+    private var isNextButtonEnabled: Bool {
+        
+        let selectionCount = libraryVC!.selection.count
+        let minimumItemsRequired = YPConfig.library.minNumberOfItems
+        
+        return (selectionCount + minimumItemsRequired > 0) && (selectionCount >= minimumItemsRequired)
     }
 }
 
