@@ -27,7 +27,7 @@ final class YPPagerMenu: UIView {
         var previousMenuItem: YPMenuItem?
         for m in menuItems {
             
-            subviews(
+            sv(
                 m
             )
             

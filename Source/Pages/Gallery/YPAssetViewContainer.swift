@@ -50,8 +50,8 @@ class YPAssetViewContainer: UIView {
         
         // TODO: Add tap gesture to play/pause. Add double tap gesture to square/unsquare
         
-        subviews(
-            spinnerView.subviews(
+        sv(
+            spinnerView.sv(
                 spinner
             ),
             curtain
@@ -69,14 +69,14 @@ class YPAssetViewContainer: UIView {
         if !onlySquare {
             // Crop Button
             squareCropButton.setImage(YPConfig.icons.cropIcon, for: .normal)
-            subviews(squareCropButton)
+            sv(squareCropButton)
             squareCropButton.size(42)
             |-15-squareCropButton
             squareCropButton.Bottom == zoomableView!.Bottom - 15
         }
         
         // Multiple selection button
-        subviews(multipleSelectionButton)
+        sv(multipleSelectionButton)
         multipleSelectionButton.size(42)
         multipleSelectionButton-15-|
         multipleSelectionButton.setImage(YPConfig.icons.multipleSelectionOffIcon, for: .normal)
