@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		402507562514C4B100574417 /* Stevia in Frameworks */ = {isa = PBXBuildFile; productRef = 402507552514C4B100574417 /* Stevia */; };
 		4025075A2514C52000574417 /* PryntTrimmerView in Frameworks */ = {isa = PBXBuildFile; productRef = 402507592514C52000574417 /* PryntTrimmerView */; };
+		409B36622519FBA200F8F6E4 /* YPLibraryVC+iOS14Limited.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409B36612519FBA200F8F6E4 /* YPLibraryVC+iOS14Limited.swift */; };
 		8458057421819B95004F241C /* YPImagePickerLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 99C6D6991F1FB5C100711DB2 /* YPImagePickerLocalizable.strings */; };
 		99019E4C2018CCD6007325C2 /* YPBottomPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99019E4B2018CCD6007325C2 /* YPBottomPagerView.swift */; };
 		99019E4E2018CD31007325C2 /* YPPagerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99019E4D2018CD31007325C2 /* YPPagerMenu.swift */; };
@@ -99,6 +100,7 @@
 /* Begin PBXFileReference section */
 		16550C5C214D5EE60090BADF /* bg */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = bg; path = bg.lproj/YPImagePickerLocalizable.strings; sourceTree = "<group>"; };
 		3B0E1B962070669B0048E95B /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/YPImagePickerLocalizable.strings; sourceTree = "<group>"; };
+		409B36612519FBA200F8F6E4 /* YPLibraryVC+iOS14Limited.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "YPLibraryVC+iOS14Limited.swift"; sourceTree = "<group>"; };
 		4EA67521208A45080076D4E3 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/YPImagePickerLocalizable.strings; sourceTree = "<group>"; };
 		52412A931CA6114A0073C4BE /* YPImagePicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YPImagePicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F01F9DC20DCC494007432E4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/YPImagePickerLocalizable.strings"; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				EB867BCE209134F100332A54 /* UIColor+Extensions.swift */,
 				EB5B07C3209146F00099C1FA /* UIButton+Extensions.swift */,
 				EB65C4B4209321420037858B /* String+Extensions.swift */,
+				409B36612519FBA200F8F6E4 /* YPLibraryVC+iOS14Limited.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				99C6D6C11F1FB5C100711DB2 /* YPAssetViewContainer.swift in Sources */,
 				EB473E17208E192800D16105 /* URL+Extensions.swift in Sources */,
 				EB473E2B208E1ECB00D16105 /* AVCaptureDevice+Extensions.swift in Sources */,
+				409B36622519FBA200F8F6E4 /* YPLibraryVC+iOS14Limited.swift in Sources */,
 				99A3C91020319227008D7E23 /* YPCropView.swift in Sources */,
 				99C6D6D11F1FB5C100711DB2 /* YPImagePicker.swift in Sources */,
 				99019E4C2018CCD6007325C2 /* YPBottomPagerView.swift in Sources */,
@@ -909,7 +913,7 @@
 			repositoryURL = "https://github.com/freshOS/Stevia";
 			requirement = {
 				kind = exactVersion;
-				version = 5.0.1;
+				version = 4.7.3;
 			};
 		};
 		402507582514C52000574417 /* XCRemoteSwiftPackageReference "PryntTrimmerView" */ = {

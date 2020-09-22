@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Photos
+import PhotosUI
 
 public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     
@@ -224,9 +224,10 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     // and ask custom popup if denied.
     func checkPermissionToAccessPhotoLibrary(block: @escaping (Bool) -> Void) {
         // Only intilialize picker if photo permission is Allowed by user.
-        let status = PHPhotoLibrary.authorizationStatus()
+        let status = authorizationStatus()
+        
         switch status {
-        case .authorized, .limited:
+        case .authorized:
             block(true)
         case .restricted, .denied:
             let popup = YPPermissionDeniedPopup()
@@ -236,10 +237,17 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
             present(alert, animated: true, completion: nil)
         case .notDetermined:
             // Show permission popup and get new status
-            PHPhotoLibrary.requestAuthorization { s in
+            requestAuthorization { s in
                 DispatchQueue.main.async {
                     block(s == .authorized)
                 }
+            }
+        case .limited:
+            if #available(iOS 14, *) {
+                block(true)
+                PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+            } else {
+                block(true)
             }
         }
     }
