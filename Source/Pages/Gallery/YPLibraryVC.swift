@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PhotosUI
+import Photos
 
 public class YPLibraryVC: UIViewController, YPPermissionCheckable {
     
@@ -227,7 +227,7 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
         let status = authorizationStatus()
         
         switch status {
-        case .authorized:
+        case .authorized, .limited:
             block(true)
         case .restricted, .denied:
             let popup = YPPermissionDeniedPopup()
@@ -241,13 +241,6 @@ public class YPLibraryVC: UIViewController, YPPermissionCheckable {
                 DispatchQueue.main.async {
                     block(s == .authorized)
                 }
-            }
-        case .limited:
-            if #available(iOS 14, *) {
-                block(true)
-                PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
-            } else {
-                block(true)
             }
         }
     }
