@@ -112,45 +112,48 @@ public struct YPImagePickerConfiguration {
         ]
     
     /// Migration
+    ///   Comment out for now so XCode 15 beta 2 compiles:
+    ///     resolves: Stored properties cannot be marked unavailable with '@available' #789
+    ///     https://github.com/Yummypets/YPImagePicker/issues/789
     
-    @available(iOS, obsoleted: 3.0.0, renamed: "video.compression")
-    public var videoCompression: String = AVAssetExportPresetHighestQuality
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "video.fileType")
-    public var videoExtension: AVFileType = .mov
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "video.recordingTimeLimit")
-    public var videoRecordingTimeLimit: TimeInterval = 60.0
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "video.libraryTimeLimit")
-    public var videoFromLibraryTimeLimit: TimeInterval = 60.0
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "video.minimumTimeLimit")
-    public var videoMinimumTimeLimit: TimeInterval = 3.0
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "video.trimmerMaxDuration")
-    public var trimmerMaxDuration: Double = 60.0
-
-    @available(iOS, obsoleted: 3.0.0, renamed: "video.trimmerMinDuration")
-    public var trimmerMinDuration: Double = 3.0
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "library.onlySquare")
-    public var onlySquareImagesFromLibrary = false
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "library.onlySquare")
-    public var onlySquareFromLibrary = false
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "targetImageSize")
-    public var libraryTargetImageSize = YPImageSize.original
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "library.mediaType")
-    public var showsVideoInLibrary = false
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "library.mediaType")
-    public var libraryMediaType = YPlibraryMediaType.photo
-    
-    @available(iOS, obsoleted: 3.0.0, renamed: "library.maxNumberOfItems")
-    public var maxNumberOfItems = 1
+//    @available(iOS, obsoleted: 3.0.0, renamed: "video.compression")
+//    public var videoCompression: String = AVAssetExportPresetHighestQuality
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "video.fileType")
+//    public var videoExtension: AVFileType = .mov
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "video.recordingTimeLimit")
+//    public var videoRecordingTimeLimit: TimeInterval = 60.0
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "video.libraryTimeLimit")
+//    public var videoFromLibraryTimeLimit: TimeInterval = 60.0
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "video.minimumTimeLimit")
+//    public var videoMinimumTimeLimit: TimeInterval = 3.0
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "video.trimmerMaxDuration")
+//    public var trimmerMaxDuration: Double = 60.0
+//
+//    @available(iOS, obsoleted: 3.0.0, renamed: "video.trimmerMinDuration")
+//    public var trimmerMinDuration: Double = 3.0
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "library.onlySquare")
+//    public var onlySquareImagesFromLibrary = false
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "library.onlySquare")
+//    public var onlySquareFromLibrary = false
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "targetImageSize")
+//    public var libraryTargetImageSize = YPImageSize.original
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "library.mediaType")
+//    public var showsVideoInLibrary = false
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "library.mediaType")
+//    public var libraryMediaType = YPlibraryMediaType.photo
+//    
+//    @available(iOS, obsoleted: 3.0.0, renamed: "library.maxNumberOfItems")
+//    public var maxNumberOfItems = 1
     
 }
 
