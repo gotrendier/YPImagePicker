@@ -75,6 +75,8 @@ final class YPAssetZoomableView: UIScrollView {
             
             strongSelf.setAssetFrame(for: strongSelf.videoView, with: preview)
             
+            strongSelf.squaredZoomScale = strongSelf.calculateSquaredZoomScale()
+            
             completion()
             
             // Stored crop position in multiple selection
